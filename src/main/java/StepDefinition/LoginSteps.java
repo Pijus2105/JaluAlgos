@@ -1,19 +1,36 @@
 package StepDefinition;
 
-import io.cucumber.java.PendingException;
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.cucumber.java.en.*;
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 
 public class LoginSteps {
 	
 	
+	
+	public static final WebDriver driver = new ChromeDriver();
+	
+	
+	
+	
 	@Given("^Open the browser$")
     public void open_the_browser() throws Throwable {
-       
-		System.out.println("This Step open the Chrome and launch the application.");
 		
+		System.out.println("This Step is open the Chrome.");
+		 System.getProperty("webdriver.chrome.driver", "C:/Users/Elphill/eclipse-workspace/JaluAlgos/src/main/resources/Drivers/chromedriver.exe");
+
+		 driver.manage().window().maximize();
+		 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		 
     }
 
     @When("^verify login page title$")
@@ -24,7 +41,24 @@ public class LoginSteps {
 
     @When("^Verify if a user cannot login with a valid username and an invalid password$")
     public void verify_if_a_user_cannot_login_with_a_valid_username_and_an_invalid_password() throws Throwable {
-    	System.out.println("This Step for user cannot login with a valid username and an invalid password.");
+    	
+    	  driver.navigate().to("http://3.209.102.189:3000/");  
+		
+    	   
+		   WebElement user =  driver.findElement(By.xpath("//input[@type='email']"));
+		   user.sendKeys("admin@gmail.com");
+		   WebElement password = driver.findElement(By.xpath("//input[@type='password']"));
+		   password.sendKeys("12345");
+		   		   
+		  
+			   if (user!=null && user.isEnabled() && password!=null && password.isEnabled()) {
+			          driver.findElement(By.xpath("//button[@class='btn sign_in_btn']")).click();
+			   } else {
+				      System.out.println("Invalid User & Password");			   
+				   }
+		
+    
+    	   System.out.println("This Step for user cannot login with a valid username and an invalid password.");
     }
 
     @When("^verify if the login page allows to log in simultaneously with different credentials in a different browser$")
@@ -68,17 +102,17 @@ public class LoginSteps {
     	System.out.println("This Step for the login with the same credentials in different browsers at the same time.");
     }
 
-    @Then("^verify if password change in chrome after when old credentials use in other browser $")
+    @Then("^verify if password change in chrome after when old credentials use in other browser$")
     public void verify_if_password_change_in_chrome_after_when_old_credentials_use_in_other_browser() throws Throwable {
     	System.out.println("This Step for the password change in chrome after when old credentials use in other browser.");
     }
 
-    @Then("^Verify the home page by pressing ‘Back button’ of the browser It should not allow you to enter into the system once you log out$")
+    @Then("^Verify the home page by pressing ‘Back button’ of the browser. It should not allow you to enter into the system once you log out$")
     public void verify_the_home_page_by_pressing_back_button_of_the_browser_it_should_not_allow_you_to_enter_into_the_system_once_you_log_out() throws Throwable {
     	System.out.println("This Step for the the home page by pressing ‘Back button’ of the browser It should not allow you to enter into the system once you log out.");
     }
 
-    @Then("^Verify that closing the browser should not log out an authenticated user Launching the application should lead the user to login state only$")
+    @Then("^Verify that closing the browser should not log-out an authenticated user Launching the application should lead the user to login state only$")
     public void verify_that_closing_the_browser_should_not_logout_an_authenticated_user_launching_the_application_should_lead_the_user_to_login_state_only() throws Throwable {
     	System.out.println("This Step for closing the browser should not log out an authenticated user Launching the application should lead the user to login state only.");
     }
@@ -112,7 +146,6 @@ public class LoginSteps {
     public void verify_after_the_user_login_page_is_open_the_cursor_should_not_remain_in_the_username_text_box_by_default() throws Throwable {
     	System.out.println("This Step for the the user login page is open, the cursor should not remain in the username text box by default.");
     }
-	
 	
 	
 
