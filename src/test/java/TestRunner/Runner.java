@@ -6,7 +6,10 @@ import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features="src/test/resources/Features", glue= {"StepDefinition"})
+@CucumberOptions(features="C:\\Users\\Elphill\\eclipse-workspace\\JaluAlgos\\src\\main\\java\\Features\\loginfunctional.feature",
+glue= {"StepDefinition"},
+
+dryRun = false)
 public class Runner {
 	
 	
