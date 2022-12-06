@@ -1,8 +1,23 @@
 Feature: Feature to test login functionality
 
-@SmokeTest
-Scenario: Login of scenario
+
+Scenario Outline: Login of scenario
+
 
 Given open the browser
 When verify login page title
-Then verify if a user will be able to login with a valid username and valid password
+
+
+
+
+Examples:
+
+    | username | password |
+    | admin@gmail.com | ab123456 |
+    | admininvalid@gmail.com | 123456 |
+    | admininvalid@gmail.com | ab123456 |
+    | admin@gmail.com | 123456 |
+    
+
+
+    
