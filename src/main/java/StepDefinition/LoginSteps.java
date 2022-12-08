@@ -137,5 +137,55 @@ public class LoginSteps {
 		     
 		     System.out.println("Admin On The Dashboard");
 	    }
+	
 
-}
+	    @Then("^User will be able to login with a valid \"([^\"]*)\" and valid \"([^\"]*)\"$")
+	    public void user_will_be_able_to_login_with_a_valid_something_and_valid_something(String username, String password) throws Throwable {
+	    	WebElement Email = driver.findElement(By.xpath("//input[@type='email']"));
+			 Email.sendKeys(username);
+			 
+			 WebElement pwd = driver.findElement(By.xpath("//input[@type='password']"));
+			 pwd.sendKeys(password);
+			 
+			 WebElement click = driver.findElement(By.xpath("//button[@class='btn sign_in_btn']"));
+		     click.click();
+		     
+		     System.out.println("Admin On The Dashboard");
+	    }  
+	    
+	    @When("^verify if a user is able to login with a new \"([^\"]*)\" only after he or she has changed able to received \"([^\"]*)\"$")
+	    public void verify_if_a_user_is_able_to_login_with_a_new_something_only_after_he_or_she_has_changed_able_to_received_something(String password, String successmessage) throws Throwable {
+	    	driver.findElement(By.xpath("//p[@class='avatar rounded-circle']")).click();
+	    	driver.findElement(By.xpath("//a[@class='dropdown-item d-flex align-items-center']")).click();
+	    	driver.findElement(By.xpath("//input[@placeholder='New Password']")).sendKeys(password);
+	    	WebElement confirmp = driver.findElement(By.xpath("//input[@placeholder='Confirm password']"));
+	    	confirmp.sendKeys(password);
+	    	confirmp.sendKeys(Keys.ENTER);
+	    	
+	    	WebElement message_validation = driver.findElement(By.xpath("//div[@role='alert']"));
+	    	String received_message = message_validation.getText();
+	    	
+	    	if(successmessage == received_message) {
+	    		System.out.println("Error Message Is : - " + received_message);
+	    	} else {
+	    		System.out.println("Actual Message Is : - " + received_message);
+	    		System.out.println("Expected Message Is : - " + successmessage);
+	    	}
+	    }
+	    
+	    
+	    
+	    
+	    
+	    
+	    }
+
+	   
+	    
+	    
+	    
+	  
+
+
+
+

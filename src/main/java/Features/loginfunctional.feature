@@ -56,7 +56,7 @@ Examples:
      | admin1@gmail.com | 12345 | User not Found |
      
      
-Scenario Outline: User cannot login with a valid credentials 
+Scenario Outline: User login with a valid credentials 
      
 Then Verify if a user will be able to login with a valid "<username>" and valid "<password>"
  
@@ -64,7 +64,28 @@ Examples:
      | username | password |
      | admin@gmail.com | 123456 |       
  
-
  
+ 
+
+#* Scenario Outline: User cannot login with a valid credentials 
      
-    
+#*Then User will be able to login with a valid "<username>" and valid "<password>"
+#*Then verify if a user is able to login with a new "<password>" only after he or she has changed 
+#*When verify after changing the password user able to see validation "<successmessage>"  
+
+#*Examples:
+   #*  | username | password | newpassword | successmessage |
+  #*  | admin@gmail.com | 123456 | 123456 | Password update Sucessfull |  
+
+
+Scenario Outline: User cannot login with a valid credentials
+
+Then User will be able to login with a valid "<username>" and valid "<password>"
+When verify if a user is able to login with a new "<password>" only after he or she has changed able to received "<successmessage>"
+
+Examples:
+
+    | username | password | successmessage |
+    | admin@gmail.com | 123456 | Password update Sucessfull | 
+     
+ 
