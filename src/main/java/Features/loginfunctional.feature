@@ -87,5 +87,36 @@ Examples:
 
     | username | password | successmessage |
     | admin@gmail.com | 123456 | Password update Sucessfull | 
+    
+Scenario Outline: User can verify the Remember Me functionality
+
+
+Then First user will be able to login with a valid "<username>" and valid "<password>"
+And verify the Remember Me functionality
+
+
+Examples:
+
+    | username | password | 
+    | admin@gmail.com | 123456 |   
      
+Scenario Outline: User can verify enter key on the login page
+
+
+When Verify if the Enter key of the keyboard is working correctly on the login page with "<username>" and valid "<password>"
  
+
+Examples:
+
+    | username | password | 
+    | admin@gmail.com | 123456 | 
+    
+    
+Scenario Outline: User at the home page by pressing Back button of the browser It should not allow you to enter into the system once you log out
+
+When verify the home page by pressing Back button of the browser It should not allow you to enter into the system once you log out with "<username>" and valid "<password>"
+
+Examples:
+
+    | username | password | 
+    | admin@gmail.com | 123456 | 

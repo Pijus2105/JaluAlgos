@@ -175,9 +175,66 @@ public class LoginSteps {
 	    
 	    
 	    
+	   	    
+	    @Then("^First user will be able to login with a valid \"([^\"]*)\" and valid \"([^\"]*)\"$")
+	    public void first_user_will_be_able_to_login_with_a_valid_something_and_valid_something(String username, String password) throws Throwable {
+	    	 
+	    	driver.findElement(By.xpath("//p[@class='avatar rounded-circle']")).click();
+	    	
+	    	driver.findElement(By.xpath("//button[@class='dropdown-item d-flex align-items-center']")).click();
+	    	
+	    	 WebElement Email = driver.findElement(By.xpath("//input[@type='email']"));
+			 Email.sendKeys(username);
+			 
+			 WebElement pwd = driver.findElement(By.xpath("//input[@type='password']"));
+			 pwd.sendKeys(password);
+	    }
+
+	    @And("^verify the Remember Me functionality$")
+	    public void verify_the_remember_me_functionality() throws Throwable {
+	    	
+	    	 driver.findElement(By.xpath("//label[@class='form-check-label']")).click();
+	    	 WebElement click = driver.findElement(By.xpath("//button[@class='btn sign_in_btn']"));
+		     click.click();
+		     
+		        driver.findElement(By.xpath("//p[@class='avatar rounded-circle']")).click();
+		    	
+		    	driver.findElement(By.xpath("//button[@class='dropdown-item d-flex align-items-center']")).click();
+	    }
 	    
 	    
 	    
+	    
+	    @When("^Verify if the Enter key of the keyboard is working correctly on the login page with \"([^\"]*)\" and valid \"([^\"]*)\"$")
+	    public void verify_if_the_enter_key_of_the_keyboard_is_working_correctly_on_the_login_page_with_something_and_valid_something(String username, String password) throws Throwable {
+	    	 WebElement Email = driver.findElement(By.xpath("//input[@type='email']"));
+			 Email.sendKeys(username);
+			 
+			 WebElement pwd = driver.findElement(By.xpath("//input[@type='password']"));
+			 pwd.sendKeys(password);
+			 
+
+			 WebElement click = driver.findElement(By.xpath("//button[@class='btn sign_in_btn']"));
+		     click.sendKeys(Keys.ENTER);
+	    
+	    }
+	    
+	    
+	    @When("^verify the home page by pressing Back button of the browser It should not allow you to enter into the system once you log out with \"([^\"]*)\" and valid \"([^\"]*)\"$")
+	    public void verify_the_home_page_by_pressing_back_button_of_the_browser_it_should_not_allow_you_to_enter_into_the_system_once_you_log_out_with_something_and_valid_something(String username, String password) throws Throwable {
+	    	 WebElement Email = driver.findElement(By.xpath("//input[@type='email']"));
+			 Email.sendKeys(username);
+			 
+			 WebElement pwd = driver.findElement(By.xpath("//input[@type='password']"));
+			 pwd.sendKeys(password);
+			 
+
+			 WebElement click = driver.findElement(By.xpath("//button[@class='btn sign_in_btn']"));
+		     click.sendKeys(Keys.ENTER);
+		     
+		     driver.navigate().back();
+	    }
+
 	    }
 
 	   
