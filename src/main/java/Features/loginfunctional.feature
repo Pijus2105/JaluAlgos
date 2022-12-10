@@ -120,3 +120,39 @@ Examples:
 
     | username | password | 
     | admin@gmail.com | 123456 | 
+    
+    
+Scenario Outline:  Verify if password change in chrome after when old credentials use in other browser 
+
+When verify if password change in chrome after when old credentials use in other browser  with "<username>" and valid "<password>" and "<newpassword>"
+
+Examples:
+
+    | username | password | newpassword |
+    | admin@gmail.com | 123456 | 1234567 |
+    
+    
+ Scenario: verify if there is a checkbox with the label remember password on the login page
+ 
+ When Verify if there is a checkbox with the label remember password on the login page
+
+Scenario Outline: verify when page refresh after all credentials is present or not at text box
+
+When page refresh after all credentials is "<username>" and "<password>" present or not at text box
+
+Examples:
+    | username | password | 
+    | admin@gmail.com | 123456 |
+    
+Scenario Outline: verify that clicking the back button does not logout the user once is user is logged in
+
+When verify that clicking the back button does not logout the user once is user is logged in is "<username>" and "<password>"
+Then The application will logout
+
+Examples:
+    | username | password | 
+    | admin@gmail.com | 123456 |
+    
+    
+   
+   

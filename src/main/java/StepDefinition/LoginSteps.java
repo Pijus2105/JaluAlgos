@@ -30,7 +30,8 @@ public class LoginSteps {
 
 		 driver.manage().window().maximize();
 		 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		 driver.get("http://3.209.102.189:3000/");
+		  driver.get("http://3.209.102.189:3000/");
+		  
 	    }
 	 
 	 
@@ -234,8 +235,106 @@ public class LoginSteps {
 		     
 		     driver.navigate().back();
 	    }
-
+	    
+	    
+	    @When("^verify if password change in chrome after when old credentials use in other browser  with \"([^\"]*)\" and valid \"([^\"]*)\" and \"([^\"]*)\"$")
+	    public void verify_if_password_change_in_chrome_after_when_old_credentials_use_in_other_browser_with_something_and_valid_something_and_something(String username, String password, String newpassword) throws Throwable {
+	    	driver.findElement(By.xpath("//p[@class='avatar rounded-circle']")).click();
+	    	driver.findElement(By.xpath("//button[@class='dropdown-item d-flex align-items-center']")).click();
+	    	
+	    	 WebElement Email = driver.findElement(By.xpath("//input[@type='email']"));
+			 Email.sendKeys(username);
+			 
+			 WebElement pwd = driver.findElement(By.xpath("//input[@type='password']"));
+			 pwd.sendKeys(password);
+			 
+			 WebElement click = driver.findElement(By.xpath("//button[@class='btn sign_in_btn']"));
+		     click.click();
+		     
+		    
+		     
+		     
+		     
+		        driver.findElement(By.xpath("//p[@class='avatar rounded-circle']")).click();
+		    	driver.findElement(By.xpath("//a[@class='dropdown-item d-flex align-items-center']")).click();
+		    	driver.findElement(By.xpath("//input[@placeholder='New Password']")).sendKeys(newpassword);
+		    	WebElement confirmp = driver.findElement(By.xpath("//input[@placeholder='Confirm password']"));
+		    	confirmp.sendKeys(newpassword);
+		    	confirmp.sendKeys(Keys.ENTER);
+		    	
+		    	
+		    	 driver.findElement(By.xpath("//p[@class='avatar rounded-circle']")).click();
+		    	 driver.findElement(By.xpath("//button[@class='dropdown-item d-flex align-items-center']")).click();
+		    	 
+		    	  WebElement Emailv = driver.findElement(By.xpath("//input[@type='email']"));
+     			  Emailv.sendKeys(username);
+				 
+				 WebElement newpwd = driver.findElement(By.xpath("//input[@type='password']"));
+				 newpwd.sendKeys(password);
+				 
+				 WebElement clicks = driver.findElement(By.xpath("//button[@class='btn sign_in_btn']"));
+			     clicks.click();
+			     
+			     newpwd.clear();
+			     
+			     WebElement newpwds = driver.findElement(By.xpath("//input[@type='password']"));
+				 newpwds.sendKeys(newpassword);
+				 
+				 WebElement clickss = driver.findElement(By.xpath("//button[@class='btn sign_in_btn']"));
+			     clickss.click();
+			     
+			     driver.findElement(By.xpath("//p[@class='avatar rounded-circle']")).click();
+			     
+			     driver.findElement(By.xpath("//a[@class='dropdown-item d-flex align-items-center']")).click();
+			     driver.findElement(By.xpath("//input[@placeholder='New Password']")).sendKeys(password);
+			     driver.findElement(By.xpath("//input[@placeholder='Confirm password']")).sendKeys(password);
+			     driver.findElement(By.xpath("//button[@class='subnit_btn  btn btn-primary']")).click();
+			     
+			     driver.findElement(By.xpath("//p[@class='avatar rounded-circle']")).click();
+			     driver.findElement(By.xpath("//button[@class='dropdown-item d-flex align-items-center']")).click();
+		    	
+		    	
 	    }
+	    @When("^Verify if there is a checkbox with the label remember password on the login page$")
+	    public void verify_if_there_is_a_checkbox_with_the_label_remember_password_on_the_login_page() throws Throwable {
+	        driver.findElement(By.xpath("//input[@type='checkbox']")).click();
+	       
+	    }
+	    
+	    @When("^page refresh after all credentials is \"([^\"]*)\" and \"([^\"]*)\" present or not at text box$")
+	    public void page_refresh_after_all_credentials_is_something_and_something_present_or_not_at_text_box(String username, String password) throws Throwable {
+	    	     WebElement Email = driver.findElement(By.xpath("//input[@type='email']"));
+			     Email.sendKeys(username);
+			  
+			     WebElement pwd = driver.findElement(By.xpath("//input[@type='password']"));
+				 pwd.sendKeys(password);
+				 
+				 driver.navigate().refresh();
+	    }
+	    
+	    
+	    @When("^verify that clicking the back button does not logout the user once is user is logged in is \"([^\"]*)\" and \"([^\"]*)\"$")
+	    public void verify_that_clicking_the_back_button_does_not_logout_the_user_once_is_user_is_logged_in_is_something_and_something(String username, String password) throws Throwable {
+	    	 WebElement Email = driver.findElement(By.xpath("//input[@type='email']"));
+		     Email.sendKeys(username);
+		  
+		     WebElement pwd = driver.findElement(By.xpath("//input[@type='password']"));
+			 pwd.sendKeys(password); 
+			 
+			 WebElement clicks = driver.findElement(By.xpath("//button[@class='btn sign_in_btn']"));
+		     clicks.click();
+	    }
+
+	    @Then("^The application will logout$")
+	    public void the_application_will_logout() throws Throwable {
+	    	
+	    	 driver.findElement(By.xpath("//p[@class='avatar rounded-circle']")).click();
+		     
+		     driver.findElement(By.xpath("//a[@class='dropdown-item d-flex align-items-center']")).click();
+		     
+		     driver.navigate().back();
+	    }
+ }
 
 	   
 	    
