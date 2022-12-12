@@ -2,6 +2,8 @@ package StepDefinition;
 
 
 import java.time.Duration;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -9,6 +11,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 
@@ -190,6 +193,9 @@ public class LoginSteps {
 			 WebElement pwd = driver.findElement(By.xpath("//input[@type='password']"));
 			 pwd.sendKeys(password);
 	    }
+	    	    
+	    
+	    
 
 	    @And("^verify the Remember Me functionality$")
 	    public void verify_the_remember_me_functionality() throws Throwable {
@@ -233,14 +239,19 @@ public class LoginSteps {
 			 WebElement click = driver.findElement(By.xpath("//button[@class='btn sign_in_btn']"));
 		     click.sendKeys(Keys.ENTER);
 		     
+		        driver.findElement(By.xpath("//p[@class='avatar rounded-circle']")).click();
+		    	driver.findElement(By.xpath("//button[@class='dropdown-item d-flex align-items-center']")).click();
+		    	
+		     
+		     
 		     driver.navigate().back();
 	    }
 	    
 	    
 	    @When("^verify if password change in chrome after when old credentials use in other browser  with \"([^\"]*)\" and valid \"([^\"]*)\" and \"([^\"]*)\"$")
 	    public void verify_if_password_change_in_chrome_after_when_old_credentials_use_in_other_browser_with_something_and_valid_something_and_something(String username, String password, String newpassword) throws Throwable {
-	    	driver.findElement(By.xpath("//p[@class='avatar rounded-circle']")).click();
-	    	driver.findElement(By.xpath("//button[@class='dropdown-item d-flex align-items-center']")).click();
+	    	//driver.findElement(By.xpath("//p[@class='avatar rounded-circle']")).click();
+	    	//driver.findElement(By.xpath("//button[@class='dropdown-item d-flex align-items-center']")).click();
 	    	
 	    	 WebElement Email = driver.findElement(By.xpath("//input[@type='email']"));
 			 Email.sendKeys(username);
@@ -334,6 +345,104 @@ public class LoginSteps {
 		     
 		     driver.navigate().back();
 	    }
+	    
+	       
+		    
+		    
+	    
+	    @And("^verify the Lost Password functionality$")
+	    public void verify_the_lost_password_functionality() throws Throwable {
+	    	driver.findElement(By.xpath("//p[@class='avatar rounded-circle']")).click();
+			  driver.findElement(By.xpath("//button[@class='dropdown-item d-flex align-items-center']")).click();
+			  driver.findElement(By.xpath("//a[@class='lost_password']")).click();
+	    }
+	    
+	    @When("^Verify once login then pressing back button after login  \"([^\"]*)\" and \"([^\"]*)\"$")
+	    public void verify_once_login_then_pressing_back_button_after_login_something_and_something(String username, String password) throws Throwable {
+	    	 WebElement Email = driver.findElement(By.xpath("//input[@type='email']"));
+		     Email.sendKeys(username);
+		  
+		     WebElement pwd = driver.findElement(By.xpath("//input[@type='password']"));
+			 pwd.sendKeys(password); 
+			 
+			 WebElement clicks = driver.findElement(By.xpath("//button[@class='btn sign_in_btn']"));
+		     clicks.click();
+		     
+		     driver.navigate().back();
+	    }
+	    
+	    
+	    @When("^Verify once login the page with  \"([^\"]*)\" and \"([^\"]*)\"$")
+	    public void verify_once_login_the_page_with_something_and_something(String username, String password) throws Throwable {
+	    	 WebElement Email = driver.findElement(By.xpath("//input[@type='email']"));
+		     Email.sendKeys(username);
+		  
+		     WebElement pwd = driver.findElement(By.xpath("//input[@type='password']"));
+			 pwd.sendKeys(password); 
+			 
+			 WebElement clicks = driver.findElement(By.xpath("//button[@class='btn sign_in_btn']"));
+		     clicks.click();
+	    }
+
+	    @Then("^Verify if admin logout the application after when open URL new tab with the other page that time should be landing the login page if redirect the parent window$")
+	    public void verify_if_admin_logout_the_application_after_when_open_url_new_tab_with_the_other_page_that_time_should_be_landing_the_login_page_if_redirect_the_parent_window() throws Throwable {
+			  WebElement Logo = driver.findElement(By.xpath("//span[@class='mt-1 sidebar-text logo_text']"));
+			  
+			  driver.switchTo().newWindow(WindowType.TAB);
+			  driver.get("http://3.209.102.189:3000/");
+			  
+			  driver.findElement(By.xpath("//p[@class='avatar rounded-circle']")).click();
+			  driver.findElement(By.xpath("//button[@class='dropdown-item d-flex align-items-center']")).click();
+			  
+			  Set<String>setwindow=driver.getWindowHandles();
+			  Iterator<String> I1= setwindow.iterator();
+			  
+			  while(I1.hasNext())
+				  {
+	
+				  String child_window=I1.next();
+				  Thread.sleep(3000);
+		          driver.switchTo().window(child_window);
+		         
+				  }
+			  
+	    }
+	    
+	    @When("^Verify once login the page with valid \"([^\"]*)\" and \"([^\"]*)\"$")
+	    public void verify_once_login_the_page_with_valid_something_and_something(String username, String password) throws Throwable {
+	    	WebElement Email = driver.findElement(By.xpath("//input[@type='email']"));
+		     Email.sendKeys(username);
+		  
+		     WebElement pwd = driver.findElement(By.xpath("//input[@type='password']"));
+			 pwd.sendKeys(password); 
+			 
+			 WebElement clicks = driver.findElement(By.xpath("//button[@class='btn sign_in_btn']"));
+		     clicks.click();
+	    }
+
+	    @Then("^Verify if admin logout the application after when open URL new tab with the other page that time should be landing the logout the parent page if referesh after iterate$")
+	    public void verify_if_admin_logout_the_application_after_when_open_url_new_tab_with_the_other_page_that_time_should_be_landing_the_logout_the_parent_page_if_referesh_after_iterate() throws Throwable {
+	    	WebElement Logo = driver.findElement(By.xpath("//span[@class='mt-1 sidebar-text logo_text']"));
+			  
+			  driver.switchTo().newWindow(WindowType.TAB);
+			  driver.get("http://3.209.102.189:3000/");
+			  
+			  driver.findElement(By.xpath("//p[@class='avatar rounded-circle']")).click();
+			  driver.findElement(By.xpath("//button[@class='dropdown-item d-flex align-items-center']")).click();
+			  
+			  Set<String>setwindow=driver.getWindowHandles();
+			  Iterator<String> I1= setwindow.iterator();
+			  
+			  while(I1.hasNext())
+				  {
+	
+				  String child_window=I1.next();
+				  Thread.sleep(3000);
+		          driver.switchTo().window(child_window);
+		          driver.navigate().refresh();
+				  }
+	    }
+
  }
 
 	   

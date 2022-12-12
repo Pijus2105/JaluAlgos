@@ -88,6 +88,8 @@ Examples:
     | username | password | successmessage |
     | admin@gmail.com | 123456 | Password update Sucessfull | 
     
+
+    
 Scenario Outline: User can verify the Remember Me functionality
 
 
@@ -153,6 +155,37 @@ Examples:
     | username | password | 
     | admin@gmail.com | 123456 |
     
-    
+Scenario: User the Lost Password functionality  
+
+
+And verify the Lost Password functionality
+
+Scenario Outline: Verify once login then pressing back button  
+
+When Verify once login then pressing back button after login  "<username>" and "<password>"
+
+Examples:
+    | username | password | 
+    | admin@gmail.com | 123456 |
+
+
+Scenario Outline: Verify if admin logout the application after when open URL new tab with the other page that time should be landing the login page if redirect the parent window 
+
+When Verify once login the page with  "<username>" and "<password>"
+Then Verify if admin logout the application after when open URL new tab with the other page that time should be landing the login page if redirect the parent window
+
+Examples:
+    | username | password | 
+    | admin@gmail.com | 123456 |
+
+
+Scenario Outline: Verify if admin logout the application after when open URL new tab with the other page that time should be landing the login page if redirect the parent window 
+
+When Verify once login the page with valid "<username>" and "<password>"
+Then Verify if admin logout the application after when open URL new tab with the other page that time should be landing the logout the parent page if referesh after iterate
+
+Examples:
+    | username | password | 
+    | admin@gmail.com | 123456 |
    
    
